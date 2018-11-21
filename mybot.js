@@ -21,4 +21,4 @@ client.on("message", (message) => {
 function close (){
   process.exit(1);// exits teh command line and shuts down the bot
 };
-client.login("Super secreat Token"); // login token
+client.login("NTAxMDM0NTA5NDAwMjc2OTk4.DqoHiw.cwKyUPxpfY4UQ4rP17iHCzRr8YE"); // login token
