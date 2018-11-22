@@ -40,16 +40,24 @@ client.on("message", (message) => { //when the client recives a message pass tha
       close();
     };
 
-    if (message.content.startsWith("list")) {
-      var cServer = message.guild.id; // gets the id of the current sever the message was sent from.
-      var cNames = client.guilds.get(cServer).channels.keys();// get's the ID number of each channel in the server
-      //this is ment to get the name of each text channel in the server so that it can be compared agienst information later
-      console.log(cNames);
-      console.log(client.guilds.get(cServer).cNames);
-      //fbMessage.channellList(message);
-    };
   }
 });
+
+/**
+ * Checks if a channel has already been created
+ * Returns true if already exists. return's false if doesn't exist.
+ * 
+ * @param {*} channelName New channel name. Used to check if it exists
+ */
+function checkIfChannelExists(message, channelName){
+  let isMatch = false;
+  client.guilds.get(message.guild.id).channels.forEach(function(value, key, map){
+    if(value.name.toString() == channelName.toString()){ //TODO: Find how to exit loop after it's found
+      isMatch = true;
+    }
+  });
+  return isMatch;
+}
 
 // Terminates the program
 function close() {
