@@ -1,42 +1,50 @@
-const Discord = require("discord.js"); // used to get the required discord functionality
-const client = new Discord.Client();// openes a client connection with discord
-//const login = require("facebook-chat-api"); // FB API used to connect to the FB chat system
+const Discord = require("discord.js"); // General Discord functionality module
+//const login = require("facebook-chat-api"); // FaceBook API module
 const fbMessage = require('./fbMessage.js');
+const client = new Discord.Client(); // Creates an instance of discord.js. Used to establish a connection to the discord service
+
+// Initalization
 var newChannel = 0;
+client.login("Super secret token"); // login token  
 
 client.on("ready", () => {
-    console.log("I am ready!"); // outputs to the command line
-  });
-  client.login("Super secret token"); // login token    
-
-//fbLogin();
-function fbLogin (){
-login({email: "email", password: "Password"}, (err, api) => {
-    if(err) return console.error(err);
-    else {
-        console.log("FB Login succesful");
-    }
-
+  console.log("I am ready!");
 });
-};
-client.on("message", (message) => {
-  if (message.author != "ping test"){
- // get the message in current channel
-   newChannel = fbMessage.reply(message);
-   console.log(newChannel);
-   if (newChannel == 1){
-       console.log("creating new cahnnel");
-        var name = message.content;
-        name = name.substr(name.indexOf(' ')+1);
-        fbMessage.makeNewChannel(message, name);
-        makeNewChannel = 0;
-   };
 
-     if (message.content.startsWith("exit")) {
+//TODO: -JACK: What's the purpose of these functions. Give an outline each block of code's purpose.
+
+function fbLogin() {
+  login({
+    email: "email",
+    password: "Password"
+  }, (err, api) => {
+    if (err) return console.error(err);
+    else {
+      console.log("FB Login succesful");
+    }
+  })
+};
+
+client.on("message", (message) => {
+
+  if (message.author != "ping test") { // get the message in current channel
+    newChannel = fbMessage.reply(message);
+    console.log(newChannel);
+
+    if (newChannel == 1) {
+      console.log("creating new cahnnel");
+      var name = message.content;
+      name = name.substr(name.indexOf(' ') + 1);
+      fbMessage.makeNewChannel(message, name);
+      makeNewChannel = 0;
+    };
+
+    if (message.content.startsWith("exit")) {
       message.channel.send("Shutting down."); // this line is not exacuting, dont understand why.
       console.log("shutting down!");
-      close(); // call's the close function
-     };
+      close();
+    };
+
     if (message.content.startsWith("list")) {
       var server;
       var cServer = message.guild.id;
@@ -44,8 +52,10 @@ client.on("message", (message) => {
       console.log(server);
       //fbMessage.channellList(message, server);
     };
-    }});
+  }
+});
 
-    function close (){
-      process.exit(1);// exits teh command line and shuts down the bot
-    };  
+// Terminates the program
+function close() {
+  process.exit(1);
+};
