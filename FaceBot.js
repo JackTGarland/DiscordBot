@@ -1,12 +1,12 @@
 const Discord = require("discord.js"); // General Discord functionality module
 //const login = require("facebook-chat-api"); // FaceBook API module
 const fbMessage = require('./fbMessage.js');
-const tokens = require("./token.js");
+const auth = require("./auth.js");
 const client = new Discord.Client(); // Creates an instance of discord.js. Used to establish a connection to the discord service
 
 // Initalization
 var newChannel = 0;
-client.login(tokens.discordToken); // login token  
+client.login(auth.discordToken); // login token  
 
 client.on("ready", () => {
   console.log("I am ready!");
