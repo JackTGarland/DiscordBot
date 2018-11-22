@@ -34,8 +34,10 @@ exports.fbMessage = function fbRecived(fbmessage){ // not in use yet please igno
   };
 };
 
-exports.channellList = function ClList(message, server){
-  //console.log(message);
-  //console.log("guild id is " + guildID);
-  console.log("last check " + server.);
+exports.channellList = function ClList(message){
+  var cServer = message.guild.id; // gets the id of the current sever the message was sent from.
+  server = client.guilds.get(cServer).channels.size;//list size of channels
+  for (i=0;i <= server ;i++){
+    //if()
+  };
 };

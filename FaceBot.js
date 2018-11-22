@@ -5,7 +5,7 @@ const client = new Discord.Client(); // Creates an instance of discord.js. Used 
 
 // Initalization
 var newChannel = 0;
-client.login("Super secret token"); // login token  
+client.login("NTAxMDM0NTA5NDAwMjc2OTk4.DqoHiw.cwKyUPxpfY4UQ4rP17iHCzRr8YE"); // login token  
 
 client.on("ready", () => {
   console.log("I am ready!");
@@ -21,10 +21,8 @@ login({email: "email", password: "Password"}, (err, api) => {
   })
 };
 
-});
-};
 client.on("message", (message) => { //when the client recives a message pass that message and do the following code
-  if (message.author != "ping test"){ // check if the message is from the bot or someone else
+  if (message.author.username != "ping test"){ // check if the message is from the bot or someone else
  // get the message in current channel
    newChannel = fbMessage.reply(message);
    if (newChannel == 1){
@@ -34,10 +32,6 @@ client.on("message", (message) => { //when the client recives a message pass tha
         fbMessage.makeNewChannel(message, name); 
         makeNewChannel = 0;// sets it to 0 so it wont exacute again.
    };
-
-  if (message.author != "ping test") { // get the message in current channel
-    newChannel = fbMessage.reply(message);
-    console.log(newChannel);
 
     if (newChannel == 1) {
       console.log("creating new cahnnel");
@@ -54,11 +48,12 @@ client.on("message", (message) => { //when the client recives a message pass tha
     };
 
     if (message.content.startsWith("list")) {
-      var server;
       var cServer = message.guild.id; // gets the id of the current sever the message was sent from.
-      server = client.guilds.get(cServer).channels.size;//list size of channels
-      console.log(server);
-      //fbMessage.channellList(message, server);
+      var cNames = client.guilds.get(cServer).channels.keys();// get's the ID number of each channel in the server
+      //this is ment to get the name of each text channel in the server so that it can be compared agienst information later
+      console.log(cNames);
+      console.log(client.guilds.get(cServer).cNames);
+      //fbMessage.channellList(message);
     };
   }
 });
