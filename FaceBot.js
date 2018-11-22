@@ -7,7 +7,7 @@ var newChannel = 0;
 client.on("ready", () => {
     console.log("I am ready!"); // outputs to the command line
   });
-  client.login("SuperSecreatToken"); // login token    
+  client.login("Super secret token"); // login token    
 
 //fbLogin();
 function fbLogin (){
@@ -19,8 +19,9 @@ login({email: "email", password: "Password"}, (err, api) => {
 
 });
 };
-
-client.on("message", (message) => { // get the message in current channel
+client.on("message", (message) => {
+  if (message.author != "ping test"){
+ // get the message in current channel
    newChannel = fbMessage.reply(message);
    console.log(newChannel);
    if (newChannel == 1){
@@ -30,14 +31,21 @@ client.on("message", (message) => { // get the message in current channel
         fbMessage.makeNewChannel(message, name);
         makeNewChannel = 0;
    };
-  });
-  function close (){
-    process.exit(1);// exits teh command line and shuts down the bot
-  };  
-  client.on("message", (message) => {
-    if (message.content.startsWith("exit")) {
+
+     if (message.content.startsWith("exit")) {
       message.channel.send("Shutting down."); // this line is not exacuting, dont understand why.
       console.log("shutting down!");
       close(); // call's the close function
-    }
-  });
+     };
+    if (message.content.startsWith("list")) {
+      var server;
+      var cServer = message.guild.id;
+      server = client.guilds.get(cServer).channels.size;
+      console.log(server);
+      //fbMessage.channellList(message, server);
+    };
+    }});
+
+    function close (){
+      process.exit(1);// exits teh command line and shuts down the bot
+    };  

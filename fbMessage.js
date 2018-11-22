@@ -20,3 +20,22 @@ exports.makeNewChannel = function createNewChannel(message , name){
   message.guild.createChannel(name, "text");
   //server.createChannel(name, "texxt");
 };
+
+exports.fbMessage = function fbRecived(fbmessage){
+  var cLength = 0;
+  uName = fbmessage.User.name
+    for (channel in server.channels){
+            cLength++
+    };
+  for (i = 0; i <= cLength; i++) {
+    if (channel[i].name == uName){
+      channel.get(channelID).send(fbmessage.body);
+    }
+  };
+};
+
+exports.channellList = function ClList(message, server){
+  //console.log(message);
+  //console.log("guild id is " + guildID);
+  console.log("last check " + server.);
+};
