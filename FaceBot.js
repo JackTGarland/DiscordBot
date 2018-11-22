@@ -10,7 +10,7 @@ client.on("ready", () => {
   client.login("Super secret token"); // login token    
 
 //fbLogin();
-function fbLogin (){
+function fbLogin (){ // facebook login functions not needed right now.
 login({email: "email", password: "Password"}, (err, api) => {
     if(err) return console.error(err);
     else {
@@ -19,17 +19,16 @@ login({email: "email", password: "Password"}, (err, api) => {
 
 });
 };
-client.on("message", (message) => {
-  if (message.author != "ping test"){
+client.on("message", (message) => { //when the client recives a message pass that message and do the following code
+  if (message.author != "ping test"){ // check if the message is from the bot or someone else
  // get the message in current channel
    newChannel = fbMessage.reply(message);
-   console.log(newChannel);
    if (newChannel == 1){
        console.log("creating new cahnnel");
-        var name = message.content;
-        name = name.substr(name.indexOf(' ')+1);
-        fbMessage.makeNewChannel(message, name);
-        makeNewChannel = 0;
+        var name = message.content; // stores the contens of the message body into name
+        name = name.substr(name.indexOf(' ')+1);// removes the first word from name
+        fbMessage.makeNewChannel(message, name); 
+        makeNewChannel = 0;// sets it to 0 so it wont exacute again.
    };
 
      if (message.content.startsWith("exit")) {
@@ -39,8 +38,8 @@ client.on("message", (message) => {
      };
     if (message.content.startsWith("list")) {
       var server;
-      var cServer = message.guild.id;
-      server = client.guilds.get(cServer).channels.size;
+      var cServer = message.guild.id; // gets the id of the current sever the message was sent from.
+      server = client.guilds.get(cServer).channels.size;//list size of channels
       console.log(server);
       //fbMessage.channellList(message, server);
     };

@@ -17,11 +17,11 @@ exports.reply = function readMessage(message){
 exports.makeNewChannel = function createNewChannel(message , name){
   console.log("function called)");
   //var server = message.guild;
-  message.guild.createChannel(name, "text");
+  message.guild.createChannel(name, "text"); // makes a new channel with the name of name and sets its type to text
   //server.createChannel(name, "texxt");
 };
 
-exports.fbMessage = function fbRecived(fbmessage){
+exports.fbMessage = function fbRecived(fbmessage){ // not in use yet please ignore.
   var cLength = 0;
   uName = fbmessage.User.name
     for (channel in server.channels){
