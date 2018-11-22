@@ -1,6 +1,6 @@
 //TODO: -JACK: Explain what the purpose of this module is exactly. General FaceBook functionality? Channel functionality? Why are these functions grouped together. What makes them simular
-
-exports.reply = function readMessage(message){
+// functions used when a message from FB is recived.
+exports.reply = function readMessage(message){ // this function is used for testing purposes.
     if (message.content.startsWith("ping")) { // checks if that message starts with "ping"
     console.log("heard ping");
       message.channel.send("pong!"); // replied to message in the same channel with "Pong!"
@@ -11,6 +11,9 @@ exports.reply = function readMessage(message){
       //console.log(message.content);
       return 1;
      
+    }
+    else if(message.content.includes("OwO")){
+      message.channel.send("*FooBar*");
     }
 };
 
