@@ -1,4 +1,4 @@
-
+//TODO: -JACK: Explain what the purpose of this module is exactly. General FaceBook functionality? Channel functionality? Why are these functions grouped together. What makes them simular
 
 exports.reply = function readMessage(message){
     if (message.content.startsWith("ping")) { // checks if that message starts with "ping"
