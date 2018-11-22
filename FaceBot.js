@@ -34,14 +34,6 @@ client.on("message", (message) => { //when the client recives a message pass tha
         makeNewChannel = 0;// sets it to 0 so it wont exacute again.
    };
 
-    if (newChannel == 1) {
-      console.log("creating new cahnnel");
-      var name = message.content;
-      name = name.substr(name.indexOf(' ') + 1);
-      fbMessage.makeNewChannel(message, name);
-      makeNewChannel = 0;
-    };
-
     if (message.content.startsWith("exit")) {
       message.channel.send("Shutting down."); // this line is not exacuting, dont understand why.
       console.log("shutting down!");
