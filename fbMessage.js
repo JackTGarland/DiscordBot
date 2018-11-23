@@ -15,6 +15,22 @@ exports.reply = function readMessage(message){ // this function is used for test
     else if(message.content.includes("OwO")){
       message.channel.send("*FooBar*");
     }
+    else if(message.content.startsWith("find")){
+      console.log("heard find");
+      return 2;
+    }
+    else if (message.content.startsWith("exit")) {
+      message.channel.send("Shutting down");
+      console.log("shutting down!");
+      close();
+    }
+    else if (message.content.startsWith("help")) {
+      message.channel.send("type 'ping' to hear 'pong'");
+      message.channel.send("type 'make X' to make a new text channel where X is its name");
+      message.channel.send("type 'find X' to look for a channel with the name of X");
+      message.channel.send("type 'exit' to stop the bot");
+    };
+    
 };
 
 exports.makeNewChannel = function createNewChannel(message , name){
@@ -37,10 +53,22 @@ exports.fbMessage = function fbRecived(fbmessage){ // not in use yet please igno
   };
 };
 
-exports.channellList = function ClList(message){
-  var cServer = message.guild.id; // gets the id of the current sever the message was sent from.
-  server = client.guilds.get(cServer).channels.size;//list size of channels
-  for (i=0;i <= server ;i++){
-    //if()
+exports.channellList = function ClList(client, message, sname){
+  var isMatch = false;
+  var cServer = message.guild.id;
+    if (client.guilds.get(cServer).channels.find(channel => channel.name == sname) != null){ // gets all information from the channels map and then comapres the channel.name to the name given from the command, null means there is no channel.
+      isMatch = true;
+      console.log("match found");
+      message.channel.send("match found");
+    }
+    else { // if not channel is found (if statment returns null) then no match is found.
+      console.log("no match found");
+      message.channel.send("no match found");
+    };
+  return isMatch;
   };
+
+// Terminates the program
+function close() {
+  process.exit(1);
 };
