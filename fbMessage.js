@@ -1,6 +1,7 @@
 //TODO: -JACK: Explain what the purpose of this module is exactly. General FaceBook functionality? Channel functionality? Why are these functions grouped together. What makes them simular
 // functions used when a message from FB is recived.
-exports.reply = function readMessage(message){ // this function is used for testing purposes.
+module.exports = {createNewChannel, reply: readMessage,channellList: ClList}; // exports all functions
+function readMessage(message){ // this function is used for testing purposes.
     if (message.content.startsWith("ping")) { // checks if that message starts with "ping"
     console.log("heard ping");
       message.channel.send("pong!"); // replied to message in the same channel with "Pong!"
@@ -33,10 +34,12 @@ exports.reply = function readMessage(message){ // this function is used for test
     
 };
 
-exports.makeNewChannel = function createNewChannel(message , name){
-  console.log("function called)");
+
+function createNewChannel(message , name){
+  console.log("creating new channel");
   //var server = message.guild;
   message.guild.createChannel(name, "text"); // makes a new channel with the name of name and sets its type to text
+  message.channel.send("new text channel made");
   //server.createChannel(name, "texxt");
 };
 
@@ -53,22 +56,23 @@ exports.fbMessage = function fbRecived(fbmessage){ // not in use yet please igno
   };
 };
 
-exports.channellList = function ClList(client, message, sname){
-  var isMatch = false;
+function ClList(client, message, sname){
+  
   var cServer = message.guild.id;
     if (client.guilds.get(cServer).channels.find(channel => channel.name == sname) != null){ // gets all information from the channels map and then comapres the channel.name to the name given from the command, null means there is no channel.
-      isMatch = true;
       console.log("match found");
       message.channel.send("match found");
     }
     else { // if not channel is found (if statment returns null) then no match is found.
       console.log("no match found");
       message.channel.send("no match found");
+      createNewChannel(message, sname);
     };
-  return isMatch;
   };
 
 // Terminates the program
 function close() {
   process.exit(1);
 };
+// exports.makeNewChannel = 
+// exports.reply = 

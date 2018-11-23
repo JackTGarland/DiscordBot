@@ -30,13 +30,13 @@ client.on("message", (message) => { //when the client recives a message pass tha
        console.log("creating new cahnnel");
         var name = message.content; // stores the contens of the message body into name
         name = name.substr(name.indexOf(' ')+1);// removes the first word from name
-        fbMessage.makeNewChannel(message, name); 
+        fbMessage.createNewChannel(message, name); 
         result = 0;// sets it to 0 so it wont exacute again.
    }
    else if (result == 2){
-    var name = message.content; // stores the contens of the message body into name
+     var name = message.content;
     name = name.substr(name.indexOf(' ')+1);// removes the first word from name
-     fbMessage.channellList(client, message, name);
+    fbMessage.channellList(client, message, name);
     result = 0;
    };
   }
