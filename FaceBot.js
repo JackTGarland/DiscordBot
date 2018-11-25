@@ -14,7 +14,7 @@ client.on("ready", () => {
 
 //fbLogin();
 function fbLogin (){ // facebook login functions not needed right now.
-login({email: "email", password: "Password"}, (err, api) => {
+login({email: auth.fbLoginDetails.login, password: auth.fbLoginDetails.password}, (err, api) => {
     if(err) return console.error(err);
     else {
       console.log("FB Login succesful");
