@@ -1,39 +1,58 @@
 //TODO: -JACK: Explain what the purpose of this module is exactly. General FaceBook functionality? Channel functionality? Why are these functions grouped together. What makes them simular
 // functions used when a message from FB is recived.
 module.exports = {createNewChannel, reply: readMessage,channellList: ClList}; // exports all functions
-function readMessage(message){ // this function is used for testing purposes.
-    if (message.content.startsWith("ping")) { // checks if that message starts with "ping"
+function readMessage(message, client){ // this function is used for testing purposes.
+  message.content = message.content.toUpperCase();
+    if (message.content.startsWith("PING")) { // checks if that message starts with "ping"
     console.log("heard ping");
       message.channel.send("pong!"); // replied to message in the same channel with "Pong!"
       return 0;
     }
-    else if(message.content.startsWith("make")){
+    else if(message.content.startsWith("MAKE")){
       console.log("make heard");
       //console.log(message.content);
       return 1;
      
     }
-    else if(message.content.includes("OwO")){
-      message.channel.send("*FooBar*");
+    else if(message.content.includes("OWO")){
+      message.channel.send("Stop it Shaun");
+      const track = require('fs');
+      //track.readFile('track.txt', ){} //Read from a file and add 1 to the number to track the number of "OwO"
     }
-    else if(message.content.startsWith("find")){
+    else if(message.content.startsWith("FIND")){
       console.log("heard find");
       return 2;
     }
-    else if (message.content.startsWith("exit")) {
+    else if (message.content.startsWith("EXIT")) {
       message.channel.send("Shutting down");
       console.log("shutting down!");
       close();
     }
-    else if (message.content.startsWith("help")) {
-      message.channel.send("type 'ping' to hear 'pong'");
-      message.channel.send("type 'make X' to make a new text channel where X is its name");
-      message.channel.send("type 'find X' to look for a channel with the name of X");
-      message.channel.send("type 'exit' to stop the bot");
+    else if(message.content.startsWith("LIST")){
+      var name = message.content; // stores the contens of the message body into name
+        name = name.substr(name.indexOf(' ')+1);// removes the first word from name
+        if (name == "GUILDS"){
+          message.channel.send("posted in log");
+          console.log(client.guilds);
+        }
+        else if (name == "MESSAGE"){
+          message.channel.send("posted in log");
+          console.log(message);
+        }
+        else if(name == "CHANNELS"){
+          message.channel.send("posted in log");
+          console.log(client.guilds.get(message.guild.id).channels);
+        }
+      }
+    else if (message.content.startsWith("HELP")){
+      console.log("help called");
+      message.channel.send("Type 'ping' to hear 'pong'.");
+      message.channel.send("Type 'make X' to make a new text channel where X is its name.");
+      message.channel.send("Type 'find X' to look for a channel with the name of X.");
+      message.channel.send("Type 'list X' to list the infromation about guilds, message or channels in the console.");
+      message.channel.send("Type 'exit' to stop the bot.");
     };
-    
-};
-
+  };
 
 function createNewChannel(message , name){
   console.log("creating new channel");
@@ -74,5 +93,3 @@ function ClList(client, message, sname){
 function close() {
   process.exit(1);
 };
-// exports.makeNewChannel = 
-// exports.reply = 

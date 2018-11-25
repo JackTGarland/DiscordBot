@@ -25,7 +25,7 @@ login({email: "email", password: "Password"}, (err, api) => {
 client.on("message", (message) => { //when the client recives a message pass that message and do the following code
   if (message.author.username != "ping test"){ // check if the message is from the bot or someone else
  // get the message in current channel
-   result = fbMessage.reply(message);
+   result = fbMessage.reply(message, client);
    if (result == 1){
        console.log("creating new cahnnel");
         var name = message.content; // stores the contens of the message body into name
