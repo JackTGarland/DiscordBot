@@ -16,10 +16,31 @@ function readMessage(message, client){ // this function is used for testing purp
     }
     else if(message.content.includes("OWO")){
       message.channel.send("Stop it Shaun");
-      const track = require('fs');
-      //track.readFile('track.txt', ){} //Read from a file and add 1 to the number to track the number of "OwO"
-    }
-    else if(message.content.startsWith("FIND")){
+      const fs = require('fs');
+      var track;
+      var data;
+      fs.readFile('track.txt', function read(err, data) {
+        if (err) {
+          throw err;
+        }
+      });
+        content = data;
+        content++;
+        fs.open('track.txt', 'w', function(err, fd){
+          if (err){
+            throw err;
+          };
+          fs.write(fd, content, 0, content.length, null, function(err){
+            if(err) throw err;
+            fs.close(fd, function(){
+              console.log("file updated");
+            });
+          });
+     
+        message.channel.send("you have said OwO " + content + " times!");
+          });
+        }
+   else if(message.content.startsWith("FIND")){
       console.log("heard find");
       return 2;
     }
