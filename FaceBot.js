@@ -12,6 +12,8 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
+
+
 //fbLogin();
 function fbLogin (){ // facebook login functions not needed right now.
 login({email: auth.fbLoginDetails.login, password: auth.fbLoginDetails.password}, (err, api) => {
