@@ -1,3 +1,5 @@
+![Alt text](img/logo.png?raw=true "Title")
+
 DiscordBot
 
 An javascript application using the discord.js, node.js and facebookchat API/DOCs.js
