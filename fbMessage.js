@@ -10,12 +10,17 @@ const fs = require('fs');
 
 // Check to see if track.txt exists on start-up. Created if not.
 fs.readFile("track.txt", (err)=>{
-  if(err.code === "ENOENT"){
-    // Create file if not already exists
-    fs.writeFile("track.txt", "0", 0, 1, (err)=>{
-      if (err) throw err;
-    });
+  if(err){
+    if(err.code === "ENOENT"){
+      // Create file if not already exists
+      fs.writeFile("track.txt", "0", 0, 1, (err)=>{
+        if (err) throw err;
+      });
+    } else {
+      throw err;
+    }
   }
+  
 });
 
 function readMessage(message, client) { // this function is used for testing purposes.
